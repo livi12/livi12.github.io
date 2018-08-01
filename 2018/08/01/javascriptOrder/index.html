@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        javascript 顺序执行 - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/css/images/photo.png" />
+        </div>
+        <div class="name">
+            <i>livi</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>HOME</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>TAGS</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>ARCHIVES</span>
+                </a>
+            </li>
+            <!-- <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>ABOUT</span>
+                </a>
+            </li> -->
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#函数声明优先于变量声明"><span class="toc-text">函数声明优先于变量声明</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#后面的函数声明还是可以覆盖前面"><span class="toc-text">后面的函数声明还是可以覆盖前面</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">search</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        javascript 顺序执行
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">Post：<span>2018-08-01 09:40:31</span></span>
+        
+        <span class="attr">Tags：/
+        
+        <a class="tag" href="/tags/#javascript" title="javascript">javascript</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <blockquote>
+<p>直觉上会认为 JavaScript 代码在执行时是由上到下一行一行执行的。但实际上这并不完全<br>正确，有一种特殊情况会导致这个假设是错误的。</p>
+</blockquote>
+<p>考虑以下代码，会输出什么</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">var</span> a; </span><br><span class="line"><span class="built_in">console</span>.log( a );</span><br></pre></td></tr></table></figure>
+<p>以及下面的这段代码输出什么</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log( a );       </span><br><span class="line"><span class="keyword">var</span> a = <span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+<p>来解释一下为什么会这样？    </p>
+<blockquote>
+<p>浏览器引擎会在解释javascript 代码之前对其进行编译，编译阶段中的一部分工作就是找到所有的声明，并用合适的作用域将它们关联起来。包括变量和函数在内的所有声明都会在任何代码被执行前首先被处理。        </p>
+</blockquote>
+<p>var a = 2; 应该怎么被解析呢？</p>
+<blockquote>
+<p>JavaScript 实际上会将其看成两个 声明:var a;和a = 2;。第一个定义声明是在编译阶段进行的。第二个赋值声明会被<strong>留在原地等执行</strong>阶段。</p>
+</blockquote>
+<p>我们的第一个代码片段会以如下形式进行处理:        </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a;a = <span class="number">2</span>; </span><br><span class="line"><span class="built_in">console</span>.log( a ); <span class="comment">//2</span></span><br></pre></td></tr></table></figure>
+<p>我们的第二个代码片段实际是按照以下流程处理的</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a; </span><br><span class="line"><span class="built_in">console</span>.log( a ); 	<span class="comment">// undefined</span></span><br><span class="line">a = <span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+<p>这个过程就好像变量和函数声明从它们在代码中出现的位置被“移动” 到了最上面。这个过程就叫作提升。<br><strong>只有声明本身会被提升，而赋值或其他运行逻辑会留在原地</strong></p>
+<p>下面代码会输出什么呢    </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">foo();		<span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>)</span>&#123;	<span class="built_in">console</span>.log( a ); <span class="comment">// undefined var a = 2;</span>&#125;</span><br></pre></td></tr></table></figure>
+<p>foo 函数的声明被提升了，因此第一行中的调用可以正常执行。<strong>每个作用域都会进行提升操作</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">foo(); <span class="comment">// 不是 ReferenceError, 而是 TypeError!</span><span class="keyword">var</span> foo = <span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>) </span>&#123; <span class="comment">// ...</span>&#125;;</span><br></pre></td></tr></table></figure>
+<p>这段程序中的变量标识符 foo() 被提升并分配给所在作用域,因此 foo() 不会导致 ReferenceError。但是 foo 此时并没有赋值(如果它是一个函数声明而不 是函数表达式，那么就会赋值)。foo() 由于对 undefined 值进行函数调用而导致非法操作，因此抛出 TypeError 异常。<strong>函数未声明，直接引用会报ReferenceError 错误，类型错误，会报TypeError 错误</strong></p>
+<h5 id="函数声明优先于变量声明"><a href="#函数声明优先于变量声明" class="headerlink" title="函数声明优先于变量声明"></a>函数声明优先于变量声明</h5><blockquote>
+<p>函数声明和变量声明都会被提升。但是一个值得注意的细节(这个细节可以出现在有多个<br>“重复”声明的代码中)是函数会首先被提升，然后才是变量。</p>
+</blockquote>
+<p>以下代码会输出1 而不是2<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">foo(); <span class="comment">// 1</span><span class="keyword">var</span> foo;<span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"> 	<span class="built_in">console</span>.log( <span class="number">1</span> );&#125;foo = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; </span><br><span class="line">	<span class="built_in">console</span>.log( <span class="number">2</span> );&#125;;</span><br></pre></td></tr></table></figure></p>
+<h5 id="后面的函数声明还是可以覆盖前面"><a href="#后面的函数声明还是可以覆盖前面" class="headerlink" title="后面的函数声明还是可以覆盖前面"></a>后面的函数声明还是可以覆盖前面</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">foo(); <span class="comment">// 3</span><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123; </span><br><span class="line">	<span class="built_in">console</span>.log( <span class="number">1</span> );&#125;<span class="keyword">var</span> foo = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; </span><br><span class="line">	<span class="built_in">console</span>.log( <span class="number">2</span> );&#125;;<span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123; </span><br><span class="line">	<span class="built_in">console</span>.log( <span class="number">3</span> );&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><ul>
+<li>javascript 引擎 把 var a = 2; 当作两个单独的声明，第一个是编译阶段的任务，而第二个则是执行阶段的任务。</li>
+<li>只有声明本身会被提升，而赋值或其他运行逻辑会留在原地</li>
+<li>每个作用域都会进行提升操作</li>
+<li>函数未声明，直接引用会报ReferenceError 错误，类型错误，会报TypeError 错误</li>
+<li>函数声明优先于变量声明</li>
+<li>后面的函数声明还是可以覆盖前面</li>
+</ul>
+
+        
+        <div id="comment-container">
+        </div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+<footer class="footer">
+    <!-- <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul> -->
+    <!--  -->
+    <p>
+        Created By
+<a href="https://github.com/livi12?tab=repositories">livi</a>❤️ All Rights Reserved.
+</p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+</html>
