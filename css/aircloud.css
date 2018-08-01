@@ -607,7 +607,6 @@ body {
 .post-content {
   line-height: 20px;
   font-size: 15px;
-  text-indent: 2em;
   color: #333333;
   font-weight: 300;
 }
@@ -934,7 +933,7 @@ pre code {
   text-shadow: none;
 }
 .highlight {
-  border-radius: 1px;
+  border-radius: 5px;
 }
 .highlight pre {
   border: none;
