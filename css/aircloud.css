@@ -631,7 +631,6 @@ body {
   color: #4a4a4a;
   font-size: 14px;
   line-height: 30px;
-  text-indent: 2em;
   letter-spacing: 1px;
 }
 .post-content p img {
@@ -659,7 +658,7 @@ body {
   padding: 10px;
 }
 .post-content pre code {
-  color: white;
+  color: #333;
   line-height: 175%;
 }
 .post-content h1 {
