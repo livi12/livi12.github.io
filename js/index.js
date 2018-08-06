@@ -17,7 +17,7 @@ window.onresize = () => {
         reLayout()
     }
 }
-	
+
 // Nav switch function on mobile
 /*****************************************************************************/
 const navToggle = document.getElementById('site-nav-toggle');
