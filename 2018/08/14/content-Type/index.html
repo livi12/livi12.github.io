@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        content-Type 三种格式的区别 - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/css/images/photo.png" />
+        </div>
+        <div class="name">
+            <i>livi</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>HOME</span>
+                </a>
+            </li>
+            <!-- <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>TAGS</span>
+                </a>
+            </li> -->
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>ARCHIVES</span>
+                </a>
+            </li>
+            <!-- <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>ABOUT</span>
+                </a>
+            </li> -->
+            
+        </ul>
+    </div>
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">search</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        content-Type 三种格式的区别
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">Post：<span>2018-08-14 15:16:09</span></span>
+        
+        </span>
+        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <p>content-type 表明信息的类型，缺省值为” text/plain”。<br>主要类型有9种，分别是application、audio、example、image、message、model、multipart、text、video。常见的有以下几种。</p>
+<pre><code>text/plain：纯文本，文件扩展名.txt
+text/html：HTML文本，文件扩展名.htm和.html
+image/jpeg：jpeg格式的图片，文件扩展名.jpg
+image/gif：GIF格式的图片，文件扩展名.gif
+audio/x-wave：WAVE格式的音频，文件扩展名.wav
+audio/mpeg：MP3格式的音频，文件扩展名.mp3
+video/mpeg：MPEG格式的视频，文件扩展名.mpg
+application/zip：PK-ZIP格式的压缩文件，文件扩展名.zip
+</code></pre><p>http 常见的提交数据的方式 application/x-www-form-urlencoded，multipart/form-data，application/json</p>
+<h4 id="application-x-www-form-urlencoded"><a href="#application-x-www-form-urlencoded" class="headerlink" title="application/x-www-form-urlencoded"></a>application/x-www-form-urlencoded</h4><p>如果不设置 enctype 属性，那么最终就会以 application/x-www-form-urlencoded 方式提交数据。这种方式提交的数据，会将数据中的空格转化为+    ，特殊字符被编码为ASCII十六进制字符    </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">""</span> <span class="attr">method</span>=<span class="string">"post"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"description"</span> <span class="attr">value</span>=<span class="string">"some text"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"file"</span> <span class="attr">name</span>=<span class="string">"myFile"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">"name"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">"psw"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"submit"</span>&gt;</span>Submit<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">description: some+text     //text 的值是 &apos;some text&apos;</span><br><span class="line">myFile: </span><br><span class="line">name: ss+       // name 的值是 &apos;ss &apos;</span><br><span class="line">psw: ee			// psw 的值是 &apos;ee&apos;</span><br></pre></td></tr></table></figure>
+<p>提交的数据格式 按key1=val1&amp;key2=val2 的方式进行编码，key 和 val 都进行了 URL 转码 如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">description=some+textw&amp;myFile=&amp;name=ss+&amp;psw=ee</span><br></pre></td></tr></table></figure>
+<p>form 的 enctype 属性可以设置<br><code>application/x-www-form-urlencoded</code> 对字符进行编码<br><code>multipart/form-data</code> 不对字符编码<br><code>text/plain</code> 空格转换为 “+” 加号，但不对特殊字符编码。</p>
+<h4 id="multipart-form-data"><a href="#multipart-form-data" class="headerlink" title="multipart/form-data"></a>multipart/form-data</h4><p>设置<form> 表单的 enctype 为multipart/form-data，也是一种常见的表单提交方式 ，查看请求的 request Headers,包含文件上传控件的表单时，必须使用该值 </form></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryA2mTcd67OXpTBQ1c</span><br></pre></td></tr></table></figure>
+<p>boundary 用于分割不同的字段，内容部分在 request payload 中显示</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">------WebKitFormBoundaryA2mTcd67OXpTBQ1c</span><br><span class="line">Content-Disposition: form-data; name=<span class="string">"description"</span></span><br><span class="line"></span><br><span class="line">some texte e</span><br><span class="line"></span><br><span class="line">------WebKitFormBoundaryA2mTcd67OXpTBQ1c</span><br><span class="line">Content-Disposition: form-data; name=<span class="string">"name"</span></span><br><span class="line"></span><br><span class="line">w w</span><br><span class="line">------WebKitFormBoundaryA2mTcd67OXpTBQ1c</span><br><span class="line">Content-Disposition: form-data; name=<span class="string">"psw"</span></span><br><span class="line"></span><br><span class="line">呃呃 v</span><br><span class="line">------WebKitFormBoundaryA2mTcd67OXpTBQ1c--</span><br></pre></td></tr></table></figure>
+<h4 id="application-json"><a href="#application-json" class="headerlink" title="application/json"></a>application/json</h4><p>设置application/json 这个 Content-Type 作为响应头，用来告诉服务端消息主体是<strong>序列化后</strong>的 JSON 字符串。</p>
+
+        
+        <div id="comment-container">
+        </div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+<footer class="footer">
+    <!-- <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul> -->
+    <!--  -->
+    <p>
+        Created By
+<a href="https://github.com/livi12?tab=repositories">livi</a>❤️ All Rights Reserved.
+</p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+</html>
