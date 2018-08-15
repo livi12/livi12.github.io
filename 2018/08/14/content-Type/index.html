@@ -56,25 +56,25 @@
             <li >
                 <a href="/">
                     <i class="iconfont icon-shouye1"></i>
-                    <span>HOME</span>
+                    <span>主页</span>
                 </a>
             </li>
             <!-- <li >
                 <a href="/tags">
                     <i class="iconfont icon-biaoqian1"></i>
-                    <span>TAGS</span>
+                    <span>标签</span>
                 </a>
             </li> -->
             <li >
                 <a href="/archives">
                     <i class="iconfont icon-guidang2"></i>
-                    <span>ARCHIVES</span>
+                    <span>存档</span>
                 </a>
             </li>
             <!-- <li >
                 <a href="/about/">
                     <i class="iconfont icon-guanyu2"></i>
-                    <span>ABOUT</span>
+                    <span>关于</span>
                 </a>
             </li> -->
             
@@ -88,7 +88,7 @@
         <div class="search-input">
             <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
             <input id="search-input"/>
-            <span id="begin-search">search</span>
+            <span id="begin-search">搜索</span>
         </div>
         <div class="search-result-container" id="search-result-container">
 
@@ -111,10 +111,10 @@
     </div>
 
     <div class="post-meta">
-        <span class="attr">Post：<span>2018-08-14 15:16:09</span></span>
+        <span class="attr">发布于：<span>2018-08-14 15:16:09</span></span>
         
         </span>
-        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
 </span>
 </span>
     </div>
@@ -132,14 +132,29 @@ application/zip：PK-ZIP格式的压缩文件，文件扩展名.zip
 <h4 id="application-x-www-form-urlencoded"><a href="#application-x-www-form-urlencoded" class="headerlink" title="application/x-www-form-urlencoded"></a>application/x-www-form-urlencoded</h4><p>如果不设置 enctype 属性，那么最终就会以 application/x-www-form-urlencoded 方式提交数据。这种方式提交的数据，会将数据中的空格转化为+    ，特殊字符被编码为ASCII十六进制字符    </p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">""</span> <span class="attr">method</span>=<span class="string">"post"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"description"</span> <span class="attr">value</span>=<span class="string">"some text"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"file"</span> <span class="attr">name</span>=<span class="string">"myFile"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">"name"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">"psw"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"submit"</span>&gt;</span>Submit<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">description: some+text     //text 的值是 &apos;some text&apos;</span><br><span class="line">myFile: </span><br><span class="line">name: ss+       // name 的值是 &apos;ss &apos;</span><br><span class="line">psw: ee			// psw 的值是 &apos;ee&apos;</span><br></pre></td></tr></table></figure>
-<p>提交的数据格式 按key1=val1&amp;key2=val2 的方式进行编码，key 和 val 都进行了 URL 转码 如下</p>
+<p>提交的数据格式 按key1=val1&amp;key2=val2 的方式进行编码，key 和 val 都进行了 URL 转码 如下,<strong>序列话的对象</strong>以 <strong>&amp;</strong> 连接。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">description=some+textw&amp;myFile=&amp;name=ss+&amp;psw=ee</span><br></pre></td></tr></table></figure>
 <p>form 的 enctype 属性可以设置<br><code>application/x-www-form-urlencoded</code> 对字符进行编码<br><code>multipart/form-data</code> 不对字符编码<br><code>text/plain</code> 空格转换为 “+” 加号，但不对特殊字符编码。</p>
 <h4 id="multipart-form-data"><a href="#multipart-form-data" class="headerlink" title="multipart/form-data"></a>multipart/form-data</h4><p>设置<form> 表单的 enctype 为multipart/form-data，也是一种常见的表单提交方式 ，查看请求的 request Headers,包含文件上传控件的表单时，必须使用该值 </form></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryA2mTcd67OXpTBQ1c</span><br></pre></td></tr></table></figure>
 <p>boundary 用于分割不同的字段，内容部分在 request payload 中显示</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">------WebKitFormBoundaryA2mTcd67OXpTBQ1c</span><br><span class="line">Content-Disposition: form-data; name=<span class="string">"description"</span></span><br><span class="line"></span><br><span class="line">some texte e</span><br><span class="line"></span><br><span class="line">------WebKitFormBoundaryA2mTcd67OXpTBQ1c</span><br><span class="line">Content-Disposition: form-data; name=<span class="string">"name"</span></span><br><span class="line"></span><br><span class="line">w w</span><br><span class="line">------WebKitFormBoundaryA2mTcd67OXpTBQ1c</span><br><span class="line">Content-Disposition: form-data; name=<span class="string">"psw"</span></span><br><span class="line"></span><br><span class="line">呃呃 v</span><br><span class="line">------WebKitFormBoundaryA2mTcd67OXpTBQ1c--</span><br></pre></td></tr></table></figure>
-<h4 id="application-json"><a href="#application-json" class="headerlink" title="application/json"></a>application/json</h4><p>设置application/json 这个 Content-Type 作为响应头，用来告诉服务端消息主体是<strong>序列化后</strong>的 JSON 字符串。</p>
+<ul>
+<li>from 表单传输文件，需要设置 enctype=”multipart/form-data”        </li>
+<li>不显示用from 表单传输文件，可以用fromData 传输,formData 对象用以将数据编译成键值对，以便用XMLHttpRequest来发送数据。其主要用于发送表单数据，但亦可用于发送带键数据(keyed data)，而<strong>独立于表单</strong>使用。传输的数据和form 表单的submit提交的数据格式一样， formData 有兼容性问题，根据需要使用</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> data = <span class="keyword">new</span> FormData();</span><br><span class="line">data.append(<span class="string">"name"</span>, <span class="string">"uploadFile"</span>);</span><br><span class="line">data.append(<span class="string">"file"</span>, <span class="string">"Slice Copy 3@2x.png"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">xhr.withCredentials = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">xhr.addEventListener(<span class="string">"readystatechange"</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">this</span>.readyState === <span class="number">4</span>) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.responseText);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">xhr.open(<span class="string">"POST"</span>, <span class="string">"https://m.meitun.com/mobile/system/uploadFileWithoutToken.htm"</span>);</span><br><span class="line">xhr.setRequestHeader(<span class="string">"cache-control"</span>, <span class="string">"no-cache"</span>);</span><br><span class="line">xhr.setRequestHeader(<span class="string">"postman-token"</span>, <span class="string">"05a28246-c251-09f0-e539-6db672b1937c"</span>);</span><br><span class="line"></span><br><span class="line">xhr.send(data);</span><br></pre></td></tr></table></figure>
+<p>post 上传文件，不能设置content-Type</p>
+<h4 id="application-json"><a href="#application-json" class="headerlink" title="application/json"></a>application/json</h4><p>设置application/json 这个 Content-Type 作为响应头，用来告诉服务端消息主体是<strong>序列化后</strong>的 JSON 字符串。<br>此处的序列化与 application/x-www-form-urlencoded 序列化不同，application/json 的序列化 用JSON.stringify 即可用，参数格式</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> data = <span class="built_in">JSON</span>.stringify(&#123;</span><br><span class="line">  <span class="string">"openid"</span>: <span class="string">"oRZB35C_gcnterDXPtuzbpOOnwDk"</span>,</span><br><span class="line">  <span class="string">"name"</span>: <span class="string">"livi"</span>,</span><br><span class="line">  <span class="string">"enrollendtime"</span>: <span class="string">"2018-08-15 18:59:35"</span>,</span><br><span class="line">  <span class="string">"activityendtime"</span>: <span class="string">"2018-08-15 19:59:35"</span>,</span><br><span class="line">  <span class="string">"protocol"</span>: <span class="string">"https"</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>根据数据后台接收的数据格式，对数据进行转化</p>
+<h4 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h4><p>一个html <code>form</code> 可以已四种方式提交</p>
+<ul>
+<li>POST 方法，设置enctype 属性   application/x-www-form-urlencoded (default)</li>
+<li>POST 方法，设置enctype 属性  text/plain</li>
+<li>POst 方法，设置enctype 属性  multipart/form-data</li>
+<li>GET 方法，enctype 属性会被忽略。</li>
+</ul>
 
         
         <div id="comment-container">
