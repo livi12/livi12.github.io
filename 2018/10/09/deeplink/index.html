@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        deeplink - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/css/images/photo.png" />
+        </div>
+        <div class="name">
+            <i>livi</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>HOME</span>
+                </a>
+            </li>
+            <!-- <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>TAGS</span>
+                </a>
+            </li> -->
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>ARCHIVES</span>
+                </a>
+            </li>
+            <!-- <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>ABOUT</span>
+                </a>
+            </li> -->
+            
+        </ul>
+    </div>
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">search</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        deeplink
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">Post：<span>2018-10-09 19:36:11</span></span>
+        
+        </span>
+        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <h3 id="deepLinking"><a href="#deepLinking" class="headerlink" title="deepLinking"></a>deepLinking</h3><p>javascript 深层链接到原生app，App在处理特定的url时能够直接跳转到对应的内容页面或者触发特定的逻辑。</p>
+<h4 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h4><ul>
+<li><p>1、微信、QQ等 -&gt; 唤醒APP</p>
+<p>  用户通过某APP分享了一条链接至微信或QQ，用户B点开该链接后，会引导用户B打开该APP或者下载该APP。</p>
+</li>
+<li><p>2、浏览器 -&gt; 唤醒APP</p>
+<p>  用户A通过浏览器打开了某APP的M站或者官网，如果检测到A来自手机端，则会引导用户打开该APP或者下载该APP。</p>
+</li>
+<li><p>3、 短信、邮件、二维码等 -&gt; 唤醒APP</p>
+<p>  用户A打开了某APP的推广短信，邮件或者扫描二维码等，会引导用户打开该APP或者下载该APP。</p>
+</li>
+<li><p>4、其他APP -&gt; 唤醒APP</p>
+<p>  用户A通过第三方APP分享了（任何可以分享信息的品台或工具：IM或者短信等）一条链接至用户B，用户B点开该链接后，链接会引导用户B打开指定APP或者下载指定APP。</p>
+</li>
+</ul>
+<h4 id="常见唤醒app的方式"><a href="#常见唤醒app的方式" class="headerlink" title="常见唤醒app的方式"></a>常见唤醒app的方式</h4><h5 id="url-Scheme"><a href="#url-Scheme" class="headerlink" title="url Scheme"></a>url Scheme</h5><p>其实是一种资源定位的方式（URI），常见的http协议其实就是一种Scheme。</p>
+<p>URL Scheme 是iOS，Android平台都支持，只需要原生APP开发时注册 scheme ， 那么用户点击到此类链接时，会自动唤醒APP，借助于 URL Router 机制，则还可以跳转至指定页面。</p>
+<h5 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h5><p>在android 端，和ios9以前的 通过添加iframe,发请求，来触发scheme跳转浏览器 控制页面跳转，对于andriod 和ios9 以后的判断代码处理如下：        </p>
+<pre><code class="javascript">
+<span class="function"><span class="keyword">function</span> <span class="title">openScheme</span>(<span class="params">url, fallbackUrl</span>) </span>{
+  <span class="keyword">if</span> (android) {
+    <span class="keyword">var</span> path = url;
+    <span class="keyword">var</span> _iframe = <span class="literal">null</span>,
+      _document = <span class="built_in">document</span>;
+    <span class="keyword">if</span> (!_iframe) {
+      _iframe = _document.createElement(<span class="string">'iframe'</span>);
+    }
+    _iframe.id = <span class="string">'callapp_iframe_'</span> + <span class="keyword">new</span> <span class="built_in">Date</span>().getTime();
+    _iframe.frameborder = <span class="string">'0'</span>;
+    _iframe.style.cssText = <span class="string">'display:none;border:0;width:0;height:0;'</span>;
+    _document.body.appendChild(_iframe);
+    _iframe.src = path;
+  } <span class="keyword">else</span> {
+    <span class="built_in">window</span>.location.href = url;
+  }
+}
+
+
+</code></pre>
+<ul>
+<li><p>【优点】 </p>
+<ul>
+<li>开发成本低，绝大多数都支持，web-native协议制定也简单。</li>
+</ul>
+</li>
+<li><p>【缺点】</p>
+<ul>
+<li>Scheme会出现冲突的情况</li>
+<li>会提示用户是否打开，这个可以用来嗅探用户是否安装对应的app，隐私风险</li>
+<li>错误处理情况因平台不同，难以统一处理，部分APP会直接跳错误页（比如Android Chrome/41，iOS中老版的Lofter）；也有的停留在原页面，但弹出提示“无法打开网页”（比如iOS7）；iOS8以及最新的Android Chrome/43 目前都是直接停留在当前页，不 会跳出错误提示。</li>
+<li>无法统一处理没有安装app的情况        </li>
+</ul>
+</li>
+</ul>
+<h4 id="支持情况"><a href="#支持情况" class="headerlink" title="支持情况"></a>支持情况</h4><p><code>iOS在实际使用中，腾讯系的微信，QQ明确禁止使用</code>，<code>iOS9以后Safari不再支持通过js，iframe等来触发scheme跳转</code>，并且还加入了确认机制，使得通过js超时机制来自动唤醒APP的方式基本不可用；Android平台则各个app厂商差异很大，比如Chrome从25及以后就同Safari情况一样。</p>
+
+        
+        <div id="comment-container">
+        </div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+<footer class="footer">
+    <!-- <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul> -->
+    <!--  -->
+    <p>
+        Created By
+<a href="https://github.com/livi12?tab=repositories">livi</a>❤️ All Rights Reserved.
+</p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+</html>
