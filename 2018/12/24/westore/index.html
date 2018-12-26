@@ -136,7 +136,7 @@
 <h4 id="存在的问题"><a href="#存在的问题" class="headerlink" title="存在的问题"></a>存在的问题</h4><ul>
 <li>如果某个key 在store和页面的data中都赋值过，那么store 中的key值对应的值会覆盖页面page 中对应key的值，，多个页面有同一key，则都会被store中的key覆盖</li>
 <li>如果多个页面的data中有’test’这个字段，如果先注册的页面通过this.store.data.test 来更新页面，则该字段会挂载到全局的store.data中，会覆盖后面的注册的页面中的‘test’字段对应的值，原理同上，私有属性还是要通过this.setData 来更新</li>
-<li>在页面注册时，将store挂着在页面this 对象上，store上又挂着了instance对象，用来存储各个页面this对象，这样形成了无限嵌套 <img src="../images/westore/store.png" alt="store嵌套图片"></li>
+<li>在页面注册时，将store挂着在页面this 对象上，store上又挂着了instance对象，用来存储各个页面this对象，这样形成了无限嵌套 <img src="/source/images/westore/store.png" alt="store嵌套图片"></li>
 </ul>
 
         
