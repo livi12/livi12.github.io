@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        微信小程序westore 数据共享原理分析 - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/css/images/photo.png" />
+        </div>
+        <div class="name">
+            <i>livi</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>HOME</span>
+                </a>
+            </li>
+            <!-- <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>TAGS</span>
+                </a>
+            </li> -->
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>ARCHIVES</span>
+                </a>
+            </li>
+            <!-- <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>ABOUT</span>
+                </a>
+            </li> -->
+            
+        </ul>
+    </div>
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">search</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        微信小程序westore 数据共享原理分析
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">Post：<span>2018-12-24 16:04:30</span></span>
+        
+        </span>
+        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <h4 id="westore"><a href="#westore" class="headerlink" title="westore"></a>westore</h4><p>解决小程序状态管理和跨页通讯的痛点<br><a href="https://github.com/Tencent/westore/blob/master/readme.md" target="_blank" rel="noopener">github 地址</a></p>
+<h4 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h4><p>westore 解决了小程序的哪些痛点，较原始小程序写法有哪些改进不在赘述，我们主要研究一些westore 是如何<code>高效的</code>实现<code>多页面</code>、<code>多组件</code>数据共享的原理。        </p>
+<ul>
+<li>高效<br>  将更改的store 数据和原始的store 数据进行比较，获得数据中更改的部分数据，更新小部分数据，而不是全部更新，<code>this.update</code>会先Diff 然后setData。        </li>
+</ul>
+<h4 id="页面更新"><a href="#页面更新" class="headerlink" title="页面更新"></a>页面更新</h4><p>下面主要就页面更新进行分析</p>
+<ul>
+<li>store 对象上的数据如何传递到页面上<br>调用create 函数，传入store 和页面参数option，将option.data 中的参数在store.data 中存在，则把store.data 对应的值赋给option.data对象中，用全局对象 originData 存储store.data 对象，实现深拷贝，并将相关函数挂载到store 对象上，并将store挂在app.js的globalData对象上，这样小程序的所有页面和组件都可以访问了。            </li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">	<span class="keyword">if</span> (!originData) &#123;</span><br><span class="line">        originData = <span class="built_in">JSON</span>.parse(<span class="built_in">JSON</span>.stringify(store.data)) <span class="comment">// 深拷贝store.data 的副本，保证指针不一样</span></span><br><span class="line">        globalStore = store <span class="comment">// 全局对象globalStore 指向store</span></span><br><span class="line">        store.instances = &#123;&#125;        </span><br><span class="line">        store.update = update <span class="comment">// 将函数挂载在store 上</span></span><br><span class="line">        store.push = push</span><br><span class="line">        store.pull = pull</span><br><span class="line">        store.add = add</span><br><span class="line">        store.remove = remove</span><br><span class="line">        store.originData = originData</span><br><span class="line">        store.env &amp;&amp; initCloud(store.env)</span><br><span class="line">        extendStoreMethod(store)</span><br><span class="line">    &#125;</span><br><span class="line">    getApp().globalData &amp;&amp; (getApp().globalData.store = store) <span class="comment">// 将store赋值给全局对象</span></span><br><span class="line">    <span class="comment">//option.data = store.data</span></span><br><span class="line">    <span class="keyword">const</span> onLoad = option.onLoad    </span><br><span class="line">    walk(store.data)        <span class="comment">// // walk 和 _walk函数最终的操作，是对含有function 的键值进行setProp求值</span></span><br><span class="line"><span class="string">``</span><span class="string">`				</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">-	数据如何更新		</span></span><br><span class="line"><span class="string">我们知道，要共享的数据都存储在一个store.js 的文件中，在创建页面的时候将store作为参数传给页面，并进行页面的初始化的工作。每个页面或组件有一个store 对象挂载在页面this 对象上，`</span><span class="keyword">this</span>.store<span class="string">` 与 create传参数`</span>store<span class="string">`，`</span>getApp().globalData.store<span class="string">` 指向同一个数据。页面初始化时，注册update事件,并在store上挂载一个instances的数组，将页面的this对象压入数组中，则全局的globalData.store存储了每个页面的this对象		</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">`</span><span class="string">``</span>javascript </span><br><span class="line">	option.onLoad = <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.store = store <span class="comment">// 每个页面有指向全局globalData.store 的指针，store，globalData.store,页面store共享数据</span></span><br><span class="line">            <span class="keyword">this</span>._updatePath = updatePath</span><br><span class="line">            rewriteUpdate(<span class="keyword">this</span>) <span class="comment">// 将update 函数挂在当前页面上</span></span><br><span class="line">            store.instances[<span class="keyword">this</span>.route] = []</span><br><span class="line">            store.instances[<span class="keyword">this</span>.route].push(<span class="keyword">this</span>) <span class="comment">// store.instances 存储每个页面的对象</span></span><br><span class="line">            onLoad &amp;&amp; onLoad.call(<span class="keyword">this</span>, e) <span class="comment">// 执行页面的onload 事件</span></span><br><span class="line">            syncValues(store.data, <span class="keyword">this</span>.data)</span><br><span class="line">            <span class="keyword">this</span>.setData(<span class="keyword">this</span>.data)</span><br><span class="line">        &#125;</span><br><span class="line">        Page(option) <span class="comment">//注册一个页面</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>核心逻辑，update 做了些什么<br>先看看代码的主要逻辑    </li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">update</span>(<span class="params">patch</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (patch) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">in</span> patch) &#123;</span><br><span class="line">                updateByPath(globalStore.data, key, patch[key])</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">let</span> diffResult = diff(globalStore.data, originData)</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">Object</span>.keys(diffResult)[<span class="number">0</span>] == <span class="string">''</span>) &#123;</span><br><span class="line">            diffResult = diffResult[<span class="string">''</span>]</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">const</span> updateAll = matchGlobalData(diffResult)</span><br><span class="line">        <span class="keyword">let</span> array = []</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">Object</span>.keys(diffResult).length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">in</span> globalStore.instances) &#123;</span><br><span class="line">                globalStore.instances[key].forEach(<span class="function"><span class="params">ins</span> =&gt;</span> &#123;</span><br><span class="line">                    <span class="keyword">if</span>(updateAll || globalStore.updateAll || ins._updatePath &amp;&amp; needUpdate(diffResult, ins._updatePath))&#123;</span><br><span class="line">                        array.push( <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">cb</span> =&gt;</span> ins.setData.call(ins, diffResult, cb) ) )         <span class="comment">// 把多个页面的数据更新放入array中统一处理</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;</span><br><span class="line">            globalStore.onChange &amp;&amp; globalStore.onChange(diffResult)</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">in</span> diffResult) &#123;</span><br><span class="line">                updateByPath(originData, key, <span class="keyword">typeof</span> diffResult[key] === <span class="string">'object'</span> ? <span class="built_in">JSON</span>.parse(<span class="built_in">JSON</span>.stringify(diffResult[key])) : diffResult[key])</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">Promise</span>.all(array).then(<span class="function"><span class="params">e</span> =&gt;</span> &#123; <span class="comment">//所有页面更新成功后，返回diffResult</span></span><br><span class="line">            resolve(diffResult)</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="存在的问题"><a href="#存在的问题" class="headerlink" title="存在的问题"></a>存在的问题</h4><ul>
+<li>如果某个key 在store和页面的data中都赋值过，那么store 中的key值对应的值会覆盖页面page 中对应key的值，，多个页面有同一key，则都会被store中的key覆盖</li>
+<li>如果多个页面的data中有’test’这个字段，如果先注册的页面通过this.store.data.test 来更新页面，则该字段会挂载到全局的store.data中，会覆盖后面的注册的页面中的‘test’字段对应的值，原理同上，私有属性还是要通过this.setData 来更新</li>
+<li>在页面注册时，将store挂着在页面this 对象上，store上又挂着了instance对象，用来存储各个页面this对象，这样形成了无限嵌套 <img src="../images/westore/store.png" alt="store嵌套图片"></li>
+</ul>
+
+        
+        <div id="comment-container">
+        </div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+<footer class="footer">
+    <!-- <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul> -->
+    <!--  -->
+    <p>
+        Created By
+<a href="https://github.com/livi12?tab=repositories">livi</a>❤️ All Rights Reserved.
+</p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+</html>
