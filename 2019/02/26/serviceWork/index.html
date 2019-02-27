@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        serviceWorker 提高用户体验 - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/css/images/photo.png" />
+        </div>
+        <div class="name">
+            <i>livi</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>HOME</span>
+                </a>
+            </li>
+            <!-- <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>TAGS</span>
+                </a>
+            </li> -->
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>ARCHIVES</span>
+                </a>
+            </li>
+            <!-- <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>ABOUT</span>
+                </a>
+            </li> -->
+            
+        </ul>
+    </div>
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">search</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        serviceWorker 提高用户体验
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">Post：<span>2019-02-26 16:04:30</span></span>
+        
+        </span>
+        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <h4 id="service-worke-简介"><a href="#service-worke-简介" class="headerlink" title="service worke 简介"></a>service worke 简介</h4><p>service worker 是一个HTML5 的api，主要用来做持久的离线缓存</p>
+<ul>
+<li>一个独立的 worker 线程，独立于当前网页进程，有自己独立的 worker context。</li>
+<li>一旦被 install，就永远存在，除非被手动 unregister</li>
+<li>用到的时候可以直接唤醒，不用的时候自动睡眠</li>
+<li>可编程拦截代理请求和返回，缓存文件，缓存的文件可以被网页进程取到（包括网络离线状态）</li>
+<li>离线内容开发者可控</li>
+<li>能向客户端推送消息</li>
+<li>不能直接操作 DOM</li>
+<li>必须在 HTTPS 环境下才能工作</li>
+<li>异步实现，内部大都是通过 Promise 实现</li>
+</ul>
+<h4 id="使用service-worker"><a href="#使用service-worker" class="headerlink" title="使用service worker"></a>使用service worker</h4><h5 id="前提条件"><a href="#前提条件" class="headerlink" title="前提条件"></a>前提条件</h5><ul>
+<li>由于 Service Worker 要求 HTTPS 的环境，我们通常可以借助于 github page 进行学习调试。当然一般浏览器允许调试 Service Worker 的时候 host 为 localhost 或者 127.0.0.1 也是 ok 的。</li>
+<li>Service Worker 的缓存机制是依赖 Cache API 实现的</li>
+<li>依赖 HTML5 fetch API</li>
+<li>依赖 Promise 实现</li>
+</ul>
+<h5 id="注册"><a href="#注册" class="headerlink" title="注册"></a>注册</h5><p>要安装 Service Worker， 我们需要通过在 js 主线程（常规的页面里的 js ）注册 Service Worker 来启动安装</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="string">'serviceWorker'</span> <span class="keyword">in</span> navigator) &#123;		<span class="comment">//判断serviceWorker 可用</span></span><br><span class="line">  <span class="built_in">window</span>.addEventListener(<span class="string">'load'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    navigator.serviceWorker.register(<span class="string">'/sw.js'</span>, &#123;   <span class="comment">// 页面加载成功后，调用register() 方法，浏览器判断 service worker 线程是否注册成功并做出相应处理</span></span><br><span class="line">      scope: <span class="string">'/'</span>		    </span><br><span class="line">      &#125;)</span><br><span class="line">      .then(<span class="function"><span class="keyword">function</span>(<span class="params">registration</span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 注册成功</span></span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'ServiceWorker registration successful with scope: '</span>, registration.scope);</span><br><span class="line">      &#125;)</span><br><span class="line">      .catch(<span class="function"><span class="keyword">function</span>(<span class="params">err</span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 注册失败:(</span></span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'ServiceWorker registration failed: '</span>, err);</span><br><span class="line">      &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>scope 取值，如果注册的service worker 文件在根目录下，scope 不传的情况下为 根目录（即sw.js 文件所在的目录）。 scope 只能控制sw.js 所在域的子目录下的文件，但路径是相对于网域的。 如果sw.js 在 /a/b/ 域下，注册的 路径为  register(‘/sw.js’,{scope: ‘/a/a/c/‘}) 则是控制的是 /a/b/c/ 下的文件, scope 的域不能超过sw.js 文件所在的域</li>
+</ul>
+<h5 id="作用域和控制"><a href="#作用域和控制" class="headerlink" title="作用域和控制"></a>作用域和控制</h5><p>Service Worker 注册的默认作用域是与脚本网址相对的 ./。这意味着如果您在 //example.com/foo/bar.js 注册一个 Service Worker，则它的默认作用域为 //example.com/foo/。</p>
+<p>我们调用页面、Worker 和共享的 Worker clients。您的 Service Worker 只能控制位于作用域内的客户端。在客户端“受控制”后，它在提取数据时将执行作用域内的 Service Worker。（即全部的文件只能在service worker 所在的域下，service worker 要在需要控制的文件的根目录下）</p>
+<h5 id="注册失败的原因"><a href="#注册失败的原因" class="headerlink" title="注册失败的原因"></a>注册失败的原因</h5><ul>
+<li>不是 HTTPS 环境，不是 localhost 或 127.0.0.1</li>
+<li>Service Worker 文件的地址没有写对，需要相对于 origin。</li>
+<li>Service Worker 文件在不同的 origin 下而不是你的 App 的，这是不被允许的。</li>
+</ul>
+<h5 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h5><p>在register 请求的路径下的sw.js 路径下绑定 install事件，结合cache API缓存资源</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 监听 service worker 的 install 事件</span></span><br><span class="line"><span class="keyword">this</span>.addEventListener(<span class="string">'install'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 如果监听到了 service worker 已经安装成功的话，就会调用 event.waitUntil 回调函数</span></span><br><span class="line">    event.waitUntil(</span><br><span class="line">        <span class="comment">// 安装成功后操作 CacheStorage 缓存，使用之前需要先通过 caches.open() 打开对应缓存空间。</span></span><br><span class="line">        caches.open(<span class="string">'my-test-cache-v1'</span>).then(<span class="function"><span class="keyword">function</span> (<span class="params">cache</span>) </span>&#123;</span><br><span class="line">            <span class="comment">// 通过 cache 缓存对象的 addAll 方法添加 precache 缓存</span></span><br><span class="line">            <span class="keyword">return</span> cache.addAll([</span><br><span class="line">                <span class="string">'/'</span>,</span><br><span class="line">                <span class="string">'/index.html'</span>,</span><br><span class="line">                <span class="string">'/main.css'</span>,</span><br><span class="line">                <span class="string">'/main.js'</span>,</span><br><span class="line">                <span class="string">'/image.jpg'</span></span><br><span class="line">            ]);</span><br><span class="line">        &#125;)</span><br><span class="line">    );</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>ExtendableEvent.waitUntil() 方法——这会确保 Service Worker 不会在 waitUntil() 里面的代码执行完毕之前安装完成。</li>
+<li>在 waitUntil() 内，我们使用了 caches.open() 方法来创建了一个叫做 v1 的新的缓存，将会是我们的站点资源缓存的第一个版本。</li>
+</ul>
+<p>以上步骤只是对需要的文件进行了缓存，下面取缓存的文件，<strong>每次任何被 Service Worker 控制的资源被请求到时，都会触发 fetch 事件</strong>，这些资源包括了指定的 scope 内的 文件，而这个代理服务器的钩子就是凭借 scope 和 fetch 事件两大利器就能把站点的请求管理的井井有条。你可以给 Service Worker 添加一个 fetch 的事件监听器，接着调用 event 上的 respondWith() 方法来劫持我们的 HTTP 响应。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.addEventListener(<span class="string">'fetch'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</span><br><span class="line">    event.respondWith(</span><br><span class="line">        caches.match(event.request).then(<span class="function"><span class="keyword">function</span> (<span class="params">response</span>) </span>&#123;</span><br><span class="line">            <span class="comment">// 来来来，代理可以搞一些代理的事情</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">// 如果 Service Worker 有自己的返回，就直接返回，减少一次 http 请求</span></span><br><span class="line">            <span class="keyword">if</span> (response) &#123;</span><br><span class="line">                <span class="keyword">return</span> response;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 如果 service worker 没有返回，那就得直接请求真实远程服务</span></span><br><span class="line">            <span class="keyword">var</span> request = event.request.clone(); <span class="comment">// 把原始请求拷过来</span></span><br><span class="line">            <span class="keyword">return</span> fetch(request).then(<span class="function"><span class="keyword">function</span> (<span class="params">httpRes</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">                <span class="comment">// http请求的返回已被抓到，可以处置了。</span></span><br><span class="line"></span><br><span class="line">                <span class="comment">// 请求失败了，直接返回失败的结果就好了。。</span></span><br><span class="line">                <span class="keyword">if</span> (!httpRes || httpRes.status !== <span class="number">200</span>) &#123;</span><br><span class="line">                    <span class="keyword">return</span> httpRes;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 请求成功的话，将请求缓存起来。</span></span><br><span class="line">                <span class="keyword">var</span> responseClone = httpRes.clone();</span><br><span class="line">                caches.open(<span class="string">'my-test-cache-v1'</span>).then(<span class="function"><span class="keyword">function</span> (<span class="params">cache</span>) </span>&#123;</span><br><span class="line">                    cache.put(event.request, responseClone);</span><br><span class="line">                &#125;);</span><br><span class="line"></span><br><span class="line">                <span class="keyword">return</span> httpRes;</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;)</span><br><span class="line">    );</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="版本更新"><a href="#版本更新" class="headerlink" title="版本更新"></a>版本更新</h4><p>可以在 install 事件中执行 self.skipWaiting() 方法跳过 waiting 状态，然后会直接进入 activate 阶段。接着在 activate 事件发生时，通过执行 self.clients.claim() 方法，更新所有客户端上的 Service Worker。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 安装阶段跳过等待，直接进入 active</span></span><br><span class="line">self.addEventListener(<span class="string">'install'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</span><br><span class="line">    event.waitUntil(self.skipWaiting());</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">self.addEventListener(<span class="string">'activate'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</span><br><span class="line">    event.waitUntil(</span><br><span class="line">        <span class="built_in">Promise</span>.all([</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 更新客户端</span></span><br><span class="line">            self.clients.claim(),</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 清理旧版本</span></span><br><span class="line">            caches.keys().then(<span class="function"><span class="keyword">function</span> (<span class="params">cacheList</span>) </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="built_in">Promise</span>.all(</span><br><span class="line">                    cacheList.map(<span class="function"><span class="keyword">function</span> (<span class="params">cacheName</span>) </span>&#123;</span><br><span class="line">                        <span class="keyword">if</span> (cacheName !== <span class="string">'my-test-cache-v1'</span>) &#123;</span><br><span class="line">                            <span class="keyword">return</span> caches.delete(cacheName);</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;)</span><br><span class="line">                );</span><br><span class="line">            &#125;)</span><br><span class="line">        ])</span><br><span class="line">    );</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h5 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h5><p><a href="https://lavas.baidu.com/pwa/offline-and-cache-loading/service-worker/service-worker-lifecycle" target="_blank" rel="noopener">LAVAS</a><br><a href="https://developers.google.com/web/fundamentals/primers/service-workers/lifecycle?hl=zh-cn" target="_blank" rel="noopener">developers</a></p>
+
+        
+        <div id="comment-container">
+        </div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+<footer class="footer">
+    <!-- <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul> -->
+    <!--  -->
+    <p>
+        Created By
+<a href="https://github.com/livi12?tab=repositories">livi</a>❤️ All Rights Reserved.
+</p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+</html>
