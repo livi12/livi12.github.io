@@ -56,25 +56,25 @@
             <li >
                 <a href="/">
                     <i class="iconfont icon-shouye1"></i>
-                    <span>HOME</span>
+                    <span>主页</span>
                 </a>
             </li>
             <!-- <li >
                 <a href="/tags">
                     <i class="iconfont icon-biaoqian1"></i>
-                    <span>TAGS</span>
+                    <span>标签</span>
                 </a>
             </li> -->
             <li >
                 <a href="/archives">
                     <i class="iconfont icon-guidang2"></i>
-                    <span>ARCHIVES</span>
+                    <span>存档</span>
                 </a>
             </li>
             <!-- <li >
                 <a href="/about/">
                     <i class="iconfont icon-guanyu2"></i>
-                    <span>ABOUT</span>
+                    <span>关于</span>
                 </a>
             </li> -->
             
@@ -88,7 +88,7 @@
         <div class="search-input">
             <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
             <input id="search-input"/>
-            <span id="begin-search">search</span>
+            <span id="begin-search">搜索</span>
         </div>
         <div class="search-result-container" id="search-result-container">
 
@@ -111,10 +111,10 @@
     </div>
 
     <div class="post-meta">
-        <span class="attr">Post：<span>2018-08-14 15:16:09</span></span>
+        <span class="attr">发布于：<span>2018-08-14 15:16:09</span></span>
         
         </span>
-        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
 </span>
 </span>
     </div>
@@ -152,8 +152,14 @@ application/zip：PK-ZIP格式的压缩文件，文件扩展名.zip
 <ul>
 <li>POST 方法，设置enctype 属性   application/x-www-form-urlencoded (default)</li>
 <li>POST 方法，设置enctype 属性  text/plain</li>
-<li>POst 方法，设置enctype 属性  multipart/form-data</li>
+<li>POST 方法，设置enctype 属性  multipart/form-data</li>
 <li>GET 方法，enctype 属性会被忽略。</li>
+</ul>
+<h4 id="重点"><a href="#重点" class="headerlink" title="重点"></a>重点</h4><p>POST 设置 Content-Type  的参数处理 </p>
+<ul>
+<li><code>multipart/form-data</code> 时，直接传值，不对内容做序列化</li>
+<li><code>application/json</code> 时，用JSON.stringify 序列化,字符串化 ，例如”{\”a\”:\”c\”,\”b\”:5}”</li>
+<li><code>application/x-www-form-urlencoded</code> 时 ,将参数用值用&amp; 连接 ，例如 a=1&amp;b=2c=3</li>
 </ul>
 
         
